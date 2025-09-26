@@ -80,10 +80,10 @@ impl<'b> Device for ChannelizedDevice {
 }
 
 impl RxToken for RxTokenWrap {
-    fn consume<R, F>(mut self, f: F) -> R
+    fn consume<R, F>(self, f: F) -> R
     where
-        F: FnOnce(&mut [u8]) -> R {
-        f(&mut self.0[..])
+        F: FnOnce(&[u8]) -> R {
+        f(&self.0[..])
     }
 }
 impl<'a> TxToken for &'a mut ChannelizedDevice {
